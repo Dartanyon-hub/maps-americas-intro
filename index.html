@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.4 system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Meet MAPS Americas</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a show rundown — three segments switched from a sticky segment bar; one segment on screen at a time. */
+:root {
+  --bg: #EDF0F3;
+  --surface: #FFFFFF;
+  --ink: #15202B;
+  --muted: #5A6673;
+  --line: #D3D9E0;
+  --accent: #C4352B;      /* tally red */
+  --accent-soft: #F6E1DE;
+  --amber: #A9720B;
+  --amber-soft: #F5EAD3;
+  --green: #2C7E52;
+  --green-soft: #DDEFE4;
+  --font-display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-2: 1.6rem;
+  --step-4: clamp(2.4rem, 6vw, 4rem);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #10161C; --surface: #18212A; --ink: #E5EAEF; --muted: #93A0AD; --line: #2A3540;
+    --accent: #F0584B; --accent-soft: #3A1E1C; --amber: #E2A63B; --amber-soft: #382B12;
+    --green: #52BA82; --green-soft: #15301F; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #10161C; --surface: #18212A; --ink: #E5EAEF; --muted: #93A0AD; --line: #2A3540;
+  --accent: #F0584B; --accent-soft: #3A1E1C; --amber: #E2A63B; --amber-soft: #382B12;
+  --green: #52BA82; --green-soft: #15301F; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: var(--step-0); line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap {
+  max-width: 1160px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* Masthead */
+.mast { padding-block: 40px 20px; display: grid; gap: 14px; }
+.mast-top { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; justify-content: space-between; }
+.org { font-family: var(--font-mono); font-size: var(--step--1); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.draft { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--amber); background: var(--amber-soft); padding: 3px 9px; border-radius: 3px; }
+.mast h1 {
+  margin: 0; font-family: var(--font-display); font-weight: 850; font-stretch: 68%;
+  font-size: var(--step-4); line-height: 0.95; letter-spacing: -0.01em; text-transform: uppercase;
+  text-wrap: balance;
+}
+.mast h1 span { color: var(--accent); }
+.mast p { margin: 0; max-width: 62ch; color: var(--muted); }
+
+/* Segment bar */
+.segbar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+}
+.segs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+.segs::-webkit-scrollbar { display: none; }
+.seg {
+  appearance: none; border: 0; background: none; color: var(--muted); cursor: pointer;
+  display: flex; align-items: baseline; gap: 10px; padding: 14px 16px 12px; white-space: nowrap;
+  border-bottom: 3px solid transparent; margin-bottom: -1px;
+  font: inherit;
+}
+.seg:first-child { padding-left: 0; }
+.seg .code { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; }
+.seg .lbl { font-family: var(--font-display); font-stretch: 80%; font-weight: 700; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.02em; }
+.seg:hover { color: var(--ink); }
+.seg[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+.seg[aria-selected="true"] .code { color: var(--accent); }
+.seg:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.keys { margin-left: auto; align-self: center; font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); white-space: nowrap; padding-left: 16px; }
+.keys kbd { border: 1px solid var(--line); border-radius: 3px; padding: 0 5px; background: var(--surface); }
+
+/* Segments */
+main { padding-block: 32px 72px; }
+.panel-head { display: grid; gap: 6px; margin-bottom: 28px; }
+.panel-head h2 { margin: 0; font-family: var(--font-display); font-weight: 800; font-stretch: 75%; font-size: var(--step-2); text-transform: uppercase; letter-spacing: 0.01em; }
+.panel-head p { margin: 0; color: var(--muted); max-width: 64ch; }
+
+/* Team */
+.team { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px 24px; }
+.person { display: grid; gap: 12px; align-content: start; min-width: 0; }
+.photo { aspect-ratio: 1; max-width: 100%; width: 100%; object-fit: cover; border-radius: 4px; background: var(--line); display: block; }
+.person h3 { margin: 0; font-family: var(--font-display); font-weight: 800; font-stretch: 72%; font-size: var(--step-1); line-height: 1.1; text-transform: uppercase; }
+.role { font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); }
+.where { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+.meta { display: grid; gap: 2px; }
+.person p { margin: 0; font-size: 0.94rem; }
+.ask { font-size: 0.86rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px; }
+.ask b { color: var(--ink); font-weight: 600; }
+
+/* Focus */
+.focus { display: grid; border-top: 1px solid var(--line); }
+.area { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr) minmax(0, 13rem); gap: 8px 32px; padding-block: 22px; border-bottom: 1px solid var(--line); }
+.area h3 { margin: 0; font-family: var(--font-display); font-weight: 750; font-stretch: 78%; font-size: 1.15rem; line-height: 1.2; text-transform: uppercase; }
+.area p { margin: 0; max-width: 62ch; }
+.area ul { margin: 8px 0 0; padding-left: 1.1em; color: var(--muted); font-size: 0.92rem; }
+.area-side { display: grid; gap: 8px; align-content: start; }
+.kv { display: grid; gap: 2px; }
+.k { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.v { font-size: 0.9rem; }
+
+.sub { margin: 0 0 16px; font-family: var(--font-mono); font-size: 0.74rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border-top: 2px solid var(--ink); padding-top: 12px; }
+.team + .sub { margin-top: 40px; }
+.team.leads { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.team.coords { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px 20px; }
+.person .tag { font-weight: 600; font-stretch: 90%; font-size: 0.7em; color: var(--muted); }
+@media (max-width: 960px) { .team.coords { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 720px) { .team.leads, .team.coords { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Focus groups */
+.groups { display: grid; gap: 36px; }
+.group { display: grid; grid-template-columns: minmax(0, 13rem) minmax(0, 1fr); gap: 12px 32px; border-top: 2px solid var(--ink); padding-top: 16px; }
+.group-h { margin: 0; }
+.gk { font-family: var(--font-mono); font-size: 0.74rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.items { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; }
+.item { padding-block: 0 18px; min-width: 0; }
+.item h4 { margin: 0 0 2px; font-family: var(--font-display); font-weight: 750; font-stretch: 78%; font-size: 1.15rem; line-height: 1.2; text-transform: uppercase; }
+.item p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+.ino { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+@media (max-width: 720px) {
+  .group { grid-template-columns: minmax(0, 1fr); }
+  .items { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Challenges */
+.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 20px; font-size: 0.86rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.watch { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.issue {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 6px;
+  padding: 22px 22px 20px; display: grid; gap: 14px; align-content: start; min-width: 0;
+}
+.issue-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.tally { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 9px 4px 8px; border-radius: 3px; }
+.tally::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.t-live { color: var(--accent); background: var(--accent-soft); }
+.t-cued { color: var(--amber); background: var(--amber-soft); }
+.t-standby { color: var(--green); background: var(--green-soft); }
+.since { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); }
+.issue h3 { margin: 0; font-family: var(--font-display); font-weight: 800; font-stretch: 74%; font-size: 1.3rem; line-height: 1.15; text-transform: uppercase; text-wrap: balance; }
+.issue p { margin: 0; }
+.issue dl { margin: 0; display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 14px; }
+.issue dt { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.issue dd { margin: 2px 0 0; font-size: 0.93rem; }
+
+.pager { display: flex; justify-content: space-between; gap: 16px; margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); }
+.pager a { color: var(--ink); text-decoration: none; display: grid; gap: 2px; }
+.pager a:hover .pl { color: var(--accent); }
+.pager a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.pager .pk { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.pager .pl { font-family: var(--font-display); font-weight: 750; font-stretch: 78%; text-transform: uppercase; font-size: 1.05rem; }
+.pager .next { text-align: right; margin-left: auto; }
+
+footer { padding-block: 0 40px; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+
+@media (max-width: 960px) {
+  .team { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .area { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .area-side { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 6px; }
+  .keys { display: none; }
+}
+@media (max-width: 960px) { .watch { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 720px) {
+  .team { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 16px; }
+  .watch { grid-template-columns: minmax(0, 1fr); }
+  .mast { padding-block: 28px 16px; }
+}
+@media (max-width: 420px) {
+  .seg { padding-inline: 10px; }
+  .seg .code { display: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .panel:not([hidden]) { animation: cut 220ms ease-out; }
+  @keyframes cut { from { opacity: 0.4; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+}
+</style>
+
+</head>
+<body>
+<header class="wrap mast">
+  <div class="mast-top">
+    <span class="org">Gravity Media × Riot Games · Seattle RBC</span>
+  </div>
+  <h1>Meet MAPS <span>Americas</span></h1>
+  <p>A quick orientation to the people, the work, and what's on the watchlist for the media team supporting League of Legends, VALORANT, and Teamfight Tactics productions out of the Remote Broadcast Center.</p>
+</header>
+
+<nav class="segbar" aria-label="Sections">
+  <div class="wrap" style="display:flex">
+    <div class="segs" role="tablist">
+      <button class="seg" role="tab" id="tab-team" aria-controls="team" data-view="team"><span class="code">SEG A</span><span class="lbl">The team</span></button>
+      <button class="seg" role="tab" id="tab-focus" aria-controls="focus" data-view="focus"><span class="code">SEG B</span><span class="lbl">What we cover</span></button>
+      <button class="seg" role="tab" id="tab-watch" aria-controls="watchlist" data-view="watchlist"><span class="code">SEG C</span><span class="lbl">Watchlist</span></button>
+    </div>
+    <span class="keys"><kbd>←</kbd> <kbd>→</kbd> to switch</span>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- SEG A: TEAM -->
+  <section class="panel" id="team" role="tabpanel" aria-labelledby="tab-team">
+    <div class="panel-head">
+      <h2>The team</h2>
+      <p>Eight people covering ingest, tagging, and media management for the Americas productions that run through the RBC.</p>
+    </div>
+    <h3 class="sub">Leads</h3>
+    <div class="team leads">
+      <article class="person">
+        <img class="photo" src="img/01_dartanyon.jpg" alt="Dartanyon">
+        <div class="meta"><h3>Dartanyon</h3><span class="role">Americas Media Manager</span></div>
+        <p>Leads MAPS Americas and coordinates with the Dublin and Singapore teams. Twenty years in production and post, with a long run in media asset management.</p>
+      </article>
+      <article class="person">
+        <img class="photo" src="img/02_garrett.jpg" alt="Garrett">
+        <div class="meta"><h3>Garrett</h3><span class="role">Senior Media Coordinator</span><span class="where" data-since="2026-09">Joined Sep 2026</span></div>
+        <p>One of our two newest team members, joining us from Disney Mastering. Still getting dialed in to live production and team management.</p>
+      </article>
+      <article class="person">
+        <img class="photo" src="img/03_ian.jpg" alt="Ian">
+        <div class="meta"><h3>Ian</h3><span class="role">Shift Lead</span><span class="where" data-since="2024-02">Joined Feb 2024</span></div>
+        <p>Our longest-serving contributor and a great technical resource. Has been on several Content Manager deployments.</p>
+      </article>
+    </div>
+    <h3 class="sub">Media Coordinators</h3>
+    <div class="team coords">
+      <article class="person">
+        <img class="photo" src="img/04_jamie.jpg" alt="Jamie">
+        <div class="meta"><h3>Jamie</h3><span class="role">Media Coordinator</span><span class="where" data-since="2025-01">Joined Jan 2025</span></div>
+      </article>
+      <article class="person">
+        <img class="photo" src="img/05_claudine.jpg" alt="Claudine">
+        <div class="meta"><h3>Claudine</h3><span class="role">Media Coordinator</span><span class="where" data-since="2025-10">Joined Oct 2025</span></div>
+      </article>
+      <article class="person">
+        <img class="photo" src="img/06_kat.jpg" alt="Kat">
+        <div class="meta"><h3>Kat</h3><span class="role">Media Coordinator</span><span class="where" data-since="2025-12">Joined Dec 2025</span></div>
+      </article>
+      <article class="person">
+        <img class="photo" src="img/07_kim.jpg" alt="Kim">
+        <div class="meta"><h3>Kim</h3><span class="role">Media Coordinator</span><span class="where" data-since="2026-06">Joined Jun 2026</span></div>
+      </article>
+      <article class="person">
+        <img class="photo" src="img/08_newian.jpg" alt="Ian">
+        <div class="meta"><h3>Ian <small class="tag">(new)</small></h3><span class="role">Media Coordinator</span><span class="where" data-since="2026-09">Joined Sep 2026</span></div>
+      </article>
+    </div>
+    <div class="pager"><a class="next" href="#focus"><span class="pk">Next · SEG B</span><span class="pl">What we cover →</span></a></div>
+  </section>
+
+  <!-- SEG B: FOCUS -->
+  <section class="panel" id="focus" role="tabpanel" aria-labelledby="tab-focus" hidden>
+    <div class="panel-head">
+      <h2>What we cover</h2>
+      <p>Primarily esports, with publishing coverage growing as time opens up.</p>
+    </div>
+    <div class="groups">
+      <div class="group">
+        <h3 class="group-h"><span class="gk">Core operations</span></h3>
+        <div class="items">
+          <div class="item"><h4>Live ingest</h4><p>Americas live ingest, including LATAM and global shows.</p></div>
+          <div class="item"><h4>Tagging operations</h4><p>NA, LATAM, and Brazil, plus APAC support through the tagging tracker.</p></div>
+          <div class="item"><h4>MAM coverage for Flanker</h4><p>Media asset management coverage for Project Flanker.</p></div>
+        </div>
+      </div>
+      <div class="group">
+        <h3 class="group-h"><span class="gk">Tools &amp; systems</span></h3>
+        <div class="items">
+          <div class="item"><h4>ISG</h4><p>Creation, deployment, and maintenance.</p></div>
+          <div class="item"><h4>Telestrator</h4><p>Administration.</p></div>
+          <div class="item"><h4>Suite Studios</h4><p>Testing and integration.</p></div>
+          <div class="item"><h4>Twelve Labs</h4><p>Exploring use cases.</p></div>
+          <div class="item"><h4>AI asset tagging</h4><p>Bringing automated tagging into the workflow.</p></div>
+        </div>
+      </div>
+      <div class="group">
+        <h3 class="group-h"><span class="gk">Regional projects</span></h3>
+        <div class="items">
+          <div class="item"><h4>Korea LCK</h4><p>Onboarding.</p></div>
+          <div class="item"><h4>EET Brazil</h4><p>Storage.</p></div>
+          <div class="item"><h4>EET Project Chili</h4><p>Support.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="pager">
+      <a href="#team"><span class="pk">Prev · SEG A</span><span class="pl">← The team</span></a>
+      <a class="next" href="#watchlist"><span class="pk">Next · SEG C</span><span class="pl">Watchlist →</span></a>
+    </div>
+  </section>
+
+  <!-- SEG C: WATCHLIST -->
+  <section class="panel" id="watchlist" role="tabpanel" aria-labelledby="tab-watch" hidden>
+    <div class="panel-head">
+      <h2>Watchlist</h2>
+      <p>The challenges I'm tracking right now.</p>
+    </div>
+    <div class="watch">
+      <article class="issue"><span class="ino">Social</span><h3>Social asset requests are expanding</h3><p>Request volume from social keeps growing.</p></article>
+      <article class="issue"><span class="ino">Resourcing</span><h3>Flanker coverage strains resources</h3><p>Covering Project Flanker puts pressure on team capacity and AME.</p></article>
+      <article class="issue"><span class="ino">Retention</span><h3>Shorter retention on replay clips</h3><p>Replay clip retention is being scaled down across RBC-supported productions.</p></article>
+      <article class="issue"><span class="ino">Tooling</span><h3>Alternatives to Wildmoka</h3><p>Looking for replacements, especially for self-clipping.</p></article>
+      <article class="issue"><span class="ino">LoL Park</span><h3>LoL Park to H.264 mezzanine</h3><p>Ushering LoL Park over to H.264 as the mezzanine format.</p></article>
+    </div>
+    <div class="pager"><a href="#focus"><span class="pk">Prev · SEG B</span><span class="pl">← What we cover</span></a></div>
+  </section>
+
+</main>
+
+<footer class="wrap">MAPS Americas · Seattle Remote Broadcast Center · Prepared November 2026</footer>
+
+<script>
+(function () {
+  const views = ["team", "focus", "watchlist"];
+  const tabs = document.querySelectorAll(".seg");
+  function show(v, scroll) {
+    if (!views.includes(v)) v = "team";
+    views.forEach(id => { document.getElementById(id).hidden = id !== v; });
+    tabs.forEach(t => {
+      const on = t.dataset.view === v;
+      t.setAttribute("aria-selected", on ? "true" : "false");
+      t.tabIndex = on ? 0 : -1;
+    });
+    if (scroll) window.scrollTo({ top: 0 });
+  }
+  function current() { return (location.hash || "#team").slice(1); }
+  function go(v) {
+    if (location.hash !== "#" + v) location.hash = v; else show(v, true);
+  }
+  tabs.forEach(t => t.addEventListener("click", () => go(t.dataset.view)));
+  window.addEventListener("hashchange", () => show(current(), true));
+  document.addEventListener("keydown", e => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (/input|textarea|select/i.test(e.target.tagName)) return;
+    const i = views.indexOf(current()) < 0 ? 0 : views.indexOf(current());
+    if (e.key === "ArrowRight" && i < views.length - 1) { go(views[i + 1]); e.preventDefault(); }
+    if (e.key === "ArrowLeft" && i > 0) { go(views[i - 1]); e.preventDefault(); }
+  });
+  document.querySelectorAll("[data-since]").forEach(el => {
+    const [y, m] = el.dataset.since.split("-").map(Number);
+    const now = new Date();
+    const months = (now.getFullYear() - y) * 12 + (now.getMonth() + 1 - m);
+    if (months < 1) return;
+    const yrs = Math.floor(months / 12), mo = months % 12;
+    const parts = [];
+    if (yrs) parts.push(yrs + " yr");
+    if (mo) parts.push(mo + " mo");
+    el.textContent += " · " + parts.join(" ");
+  });
+  show(current(), false);
+})();
+</script>
+
+</body>
+</html>
